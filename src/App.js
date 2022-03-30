@@ -1,7 +1,12 @@
 import "./App.scss";
+import MainUI from "./components/MainUI/MainUI";
 
 function App() {
-  return <div>Main</div>;
+  return (
+    <>
+      <MainUI />
+    </>
+  );
 }
 
 export default App;
