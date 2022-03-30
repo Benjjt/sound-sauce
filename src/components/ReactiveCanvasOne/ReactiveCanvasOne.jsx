@@ -46,7 +46,7 @@ export default function ReactiveCanvasOne() {
 
     //*Different Shapes
     // const planeGeometry = new THREE.BoxGeometry(64, 64, 8, 64, 64, 8);
-    const planeGeometry = new THREE.SphereGeometry(16, 100, 100);
+    const planeGeometry = new THREE.SphereGeometry(16, 64, 64);
     // const planeGeometry = new THREE.PlaneGeometry(64, 64, 64, 64);
     const planeCustomMaterial = new THREE.ShaderMaterial({
       uniforms: uniforms, //* This is the info that causes changes to the shaders. In this case, Data array and time
