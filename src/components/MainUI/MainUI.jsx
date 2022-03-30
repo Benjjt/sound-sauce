@@ -4,6 +4,7 @@ import ReactiveCanvasOne from "../ReactiveCanvasOne/ReactiveCanvasOne";
 
 export default function MainUI() {
   //   const gui = new GUI();
+
   return (
     <>
       <ReactiveCanvasOne />

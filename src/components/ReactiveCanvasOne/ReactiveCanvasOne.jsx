@@ -4,9 +4,14 @@ import * as THREE from "three";
 import SceneInit from "../../utils/InitScene";
 import testAudio from "../../assets/Music/test-audio.mp3";
 import { vertexShader, fragmentShader } from "../../utils/Shaders";
+import { GUI } from "dat.gui";
 
 export default function ReactiveCanvasOne() {
-  let test, audioContext, audioElement, dataArray, analyser, source;
+  let test, audioContext, audioElement, dataArray, analyser, source, gui;
+
+  const initGui = () => {
+    gui = new GUI();
+  };
 
   const setupAudioContext = () => {
     audioContext = new window.AudioContext();
@@ -39,16 +44,13 @@ export default function ReactiveCanvasOne() {
       },
     };
 
-    //*GUI
-
     //*Different Shapes
     // const planeGeometry = new THREE.BoxGeometry(64, 64, 8, 64, 64, 8);
-    const planeGeometry = new THREE.SphereGeometry(16, 64, 64);
+    const planeGeometry = new THREE.SphereGeometry(16, 100, 100);
     // const planeGeometry = new THREE.PlaneGeometry(64, 64, 64, 64);
-
     const planeCustomMaterial = new THREE.ShaderMaterial({
       uniforms: uniforms, //* This is the info that causes changes to the shaders. In this case, Data array and time
-      vertexShader: vertexShader(),
+      vertexShader: vertexShader("sin", "50.0"),
       fragmentShader: fragmentShader(),
       wireframe: true,
     });
@@ -60,6 +62,19 @@ export default function ReactiveCanvasOne() {
     planeMesh.scale.z = 2;
     planeMesh.position.y = 8;
     test.scene.add(planeMesh);
+
+    if (gui === undefined) {
+      initGui();
+      const audioWaveGui = gui.addFolder("audio waveform");
+      audioWaveGui
+        .add(planeCustomMaterial, "wireframe")
+        .name("wireframe")
+        .listen();
+      audioWaveGui
+        .add(uniforms.u_amplitude, "value", 1.0, 8.0)
+        .name("amplitude")
+        .listen();
+    }
 
     const render = (time) => {
       //* note: update audio data
@@ -86,7 +101,7 @@ export default function ReactiveCanvasOne() {
   return (
     <div>
       <div className="audio-player">
-        <audio id="myAudio" src={testAudio} controls autoPlay onPlay={play} />
+        <audio id="myAudio" src={testAudio} controls onPlay={play} />
       </div>
       <canvas id="myThreeJsCanvas"></canvas>
     </div>
