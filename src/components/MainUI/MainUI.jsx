@@ -1,5 +1,6 @@
 import "./main-ui.scss";
 import ReactiveCanvasOne from "../ReactiveCanvasOne/ReactiveCanvasOne";
+import AudioPlayer from "../AudioPlayer/AudioPlayer";
 // import { GUI } from "dat.gui";
 
 export default function MainUI() {
@@ -7,7 +8,8 @@ export default function MainUI() {
 
   return (
     <>
-      <ReactiveCanvasOne />
+      <AudioPlayer />
+      {/* <ReactiveCanvasOne /> */}
     </>
   );
 }
