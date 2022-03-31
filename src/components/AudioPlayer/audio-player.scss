@@ -2,12 +2,30 @@
 
 .audio-player {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: auto;
   background-color: var(--light);
   padding: 20px 20px;
   border-radius: 10px;
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__options {
+    align-self: flex-end;
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__icon:hover {
+    color: var(--primary);
+    cursor: pointer;
+  }
 
   &__forward-backward {
     background: none;

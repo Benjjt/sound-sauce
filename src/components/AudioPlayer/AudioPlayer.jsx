@@ -4,6 +4,8 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa";
+import { BsUpload } from "react-icons/bs";
+import { BsFillMicFill } from "react-icons/bs";
 import testMusic from "../../assets/Music/test-audio.mp3";
 
 const AudioPlayer = () => {
@@ -11,6 +13,7 @@ const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [componentState, setComponentState] = useState("player");
 
   //*references
   const audioPlayer = useRef(); //* reference our audio component
@@ -18,10 +21,16 @@ const AudioPlayer = () => {
   const animationRef = useRef(); //*reference the animation
 
   useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
-    setDuration(seconds);
-    progressBar.current.max = seconds;
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+    if (componentState === "player") {
+      const seconds = Math.floor(audioPlayer.current.duration);
+      setDuration(seconds);
+      progressBar.current.max = seconds;
+    }
+  }, [
+    componentState,
+    audioPlayer?.current?.loadedmetadata,
+    audioPlayer?.current?.readyState,
+  ]);
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -74,40 +83,66 @@ const AudioPlayer = () => {
 
   return (
     <div className="audio-player">
-      <audio ref={audioPlayer} src={testMusic}></audio>
-      <button onClick={backThirty} className="audio-player__forward-backward">
-        <BsArrowLeftShort /> 30
-      </button>
-      <button className="audio-player__play-pause" onClick={togglePlayPause}>
-        {isPlaying ? <FaPause /> : <FaPlay className="audio-player__play" />}
-      </button>
-      <button
-        onClick={forwardThirty}
-        className="audio-player__forward-backward"
-      >
-        <BsArrowRightShort /> 30
-      </button>
+      {componentState === "player" && (
+        <>
+          <div className="audio-player__options">
+            <BsUpload
+              onClick={() => setComponentState("upload")}
+              className="audio-player__icon"
+            />
+            <BsFillMicFill
+              onClick={() => setComponentState("microphone")}
+              className="audio-player__icon"
+            />
+          </div>
+          <div className="audio-player__container">
+            <audio ref={audioPlayer} src={testMusic}></audio>
+            <button
+              onClick={backThirty}
+              className="audio-player__forward-backward"
+            >
+              <BsArrowLeftShort /> 30
+            </button>
+            <button
+              className="audio-player__play-pause"
+              onClick={togglePlayPause}
+            >
+              {isPlaying ? (
+                <FaPause />
+              ) : (
+                <FaPlay className="audio-player__play" />
+              )}
+            </button>
+            <button
+              onClick={forwardThirty}
+              className="audio-player__forward-backward"
+            >
+              30 <BsArrowRightShort />
+            </button>
+          </div>
 
-      {/* {CURRENT TIME} */}
-      <div className="audio-player__current-time">
-        {calculateTime(currentTime)}
-      </div>
-
-      {/* {PROGRESS BAR} */}
-      <div>
-        <input
-          type="range"
-          className="audio-player__progress"
-          defaultValue="0"
-          ref={progressBar}
-          onChange={changeRange}
-        />
-      </div>
-
-      {/* {DURATION} */}
-      <div className="audio-player__duration">
-        {duration && !isNaN(duration) && calculateTime(duration)}
-      </div>
+          <div className="audio-player__container">
+            {/* {CURRENT TIME} */}
+            <div className="audio-player__current-time">
+              {calculateTime(currentTime)}
+            </div>
+            {/* {PROGRESS BAR} */}
+            <div>
+              <input
+                type="range"
+                className="audio-player__progress"
+                defaultValue="0"
+                ref={progressBar}
+                onChange={changeRange}
+              />
+            </div>
+            {/* {DURATION} */}
+            <div className="audio-player__duration">
+              {duration && !isNaN(duration) && calculateTime(duration)}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
