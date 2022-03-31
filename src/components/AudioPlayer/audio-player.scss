@@ -3,10 +3,15 @@
 .audio-player {
   display: flex;
   align-items: center;
-  width: 700px;
+  justify-content: center;
+  width: auto;
+  background-color: var(--light);
+  padding: 20px 20px;
+  border-radius: 10px;
 
   &__forward-backward {
     background: none;
+    color: var(--dark);
     border: none;
     display: flex;
     align-items: center;
@@ -21,11 +26,12 @@
 
   &__play-pause {
     background: var(--primary);
+    color: var(--light);
     border: none;
     border-radius: 50%;
-    width: 75px;
-    height: 75px;
-    font-size: 32px;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,13 +40,14 @@
 
   &__play {
     position: relative;
-    left: 5px;
+    left: 2px;
   }
 
   &__current-time,
   &__duration {
     font-family: monospace;
     font-size: 16px;
+    margin: 10px;
   }
 
   &__current-time {
@@ -48,10 +55,10 @@
   }
 
   &__progress {
-    --bar-bg: var(--light);
+    --bar-bg: var(--dark);
     --seek-before-width: 0;
     --seek-before-color: var(--primary);
-    --playhead: var(--dark);
+    --playhead: var(--light);
     --playhead-selected: var(--darkest);
 
     appearance: none;
