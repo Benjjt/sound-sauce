@@ -88,7 +88,12 @@ const AudioPlayer = (props) => {
           />
         </div>
         <div className="audio-player__container">
-          <audio ref={audioPlayer} src={testMusic}></audio>
+          <audio
+            onPlay={props.play}
+            id="myAudio"
+            ref={audioPlayer}
+            src={testMusic}
+          ></audio>
           <button
             onClick={backThirty}
             className="audio-player__forward-backward"
