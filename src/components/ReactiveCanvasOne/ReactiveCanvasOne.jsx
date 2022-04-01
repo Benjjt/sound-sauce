@@ -99,10 +99,10 @@ export default function ReactiveCanvasOne() {
   }, []);
 
   return (
-    <div>
-      <div className="audio-player">
+    <div className="canvas-container" id="canvas-container">
+      {/* <div className="audio-player">
         <audio id="myAudio" src={testAudio} controls onPlay={play} />
-      </div>
+      </div> */}
       <canvas id="myThreeJsCanvas"></canvas>
     </div>
   );

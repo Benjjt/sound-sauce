@@ -1,14 +1,12 @@
 import "./main-ui.scss";
 import ReactiveCanvasOne from "../ReactiveCanvasOne/ReactiveCanvasOne";
-import { AudioMain } from "../AudioMain/AudioMain";
+import { ControlPannel } from "../ControlPannel/ControlPannel";
 
 export default function MainUI() {
-  //   const gui = new GUI();
-
   return (
-    <>
-      <AudioMain />
-      {/* <ReactiveCanvasOne /> */}
-    </>
+    <div className="main-ui">
+      <ControlPannel />
+      <ReactiveCanvasOne />
+    </div>
   );
 }

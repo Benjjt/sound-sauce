@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/sound-sauce-server
 .pnp.js
 
 # testing

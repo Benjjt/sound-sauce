@@ -1,22 +1,33 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import Stats from "three/examples/jsm/libs/stats.module";
+// import Stats from "three/examples/jsm/libs/stats.module";
 
 export default class SceneInit {
-  constructor(canvasID, camera, scene, stats, controls, renderer, fov = 36) {
+  constructor(
+    canvasID,
+    camera,
+    scene,
+
+    controls,
+    renderer,
+    container,
+    fov = 36
+  ) {
     this.fov = fov;
     this.scene = scene;
-    this.stats = stats;
+
     this.camera = camera;
     this.controls = controls;
     this.renderer = renderer;
     this.canvasID = canvasID;
+    this.container = container;
   }
 
   initScene() {
+    this.container = document.getElementById("canvas-container");
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
-      window.innerWidth / window.innerHeight,
+      this.container.offsetWidth / this.container.offsetHeight,
       1,
       1000
     );
@@ -33,19 +44,21 @@ export default class SceneInit {
 
     // specify a canvas which is already created in the HTML file and tagged by an id
     // aliasing enabled
-    const canvas = document.getElementById(this.canvasID);
+    const canvas = document.getElementById("myThreeJsCanvas");
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
     });
-
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(this.renderer.domElement);
+    this.renderer.setSize(
+      this.container.offsetWidth,
+      this.container.offsetHeight
+    );
+    this.container.appendChild(canvas);
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-    this.stats = Stats();
-    document.body.appendChild(this.stats.dom);
+    // this.stats = Stats();
+    // document.body.appendChild(this.stats.dom);
 
     // ambient light which is for the whole scene
     let ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
@@ -67,7 +80,7 @@ export default class SceneInit {
     // requestAnimationFrame(this.animate.bind(this));
     window.requestAnimationFrame(this.animate.bind(this));
     this.render();
-    this.stats.update();
+
     this.controls.update();
   }
 
@@ -77,8 +90,12 @@ export default class SceneInit {
   }
 
   onWindowResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.aspect =
+      this.container.offsetWidth / this.container.offsetHeight;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(
+      this.container.offsetWidth,
+      this.container.offsetHeight
+    );
   }
 }

@@ -1,15 +1,8 @@
 @use "../../styles/variables.scss" as *;
+@use "../../styles/mixins.scss" as mixin;
 
 .audio-player {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  background-color: var(--light);
-  padding: 20px 20px;
-  border-radius: 10px;
-
+  @include mixin.audio-card;
   &__container {
     display: flex;
     justify-content: center;
