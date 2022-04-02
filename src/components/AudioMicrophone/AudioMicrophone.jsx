@@ -50,7 +50,6 @@ export const AudioMicrophone = (props) => {
           className="audio-microphone__icon"
         />
       )}
-      <div></div>
     </div>
   );
 };

@@ -7,7 +7,6 @@ export default class SceneInit {
     canvasID,
     camera,
     scene,
-
     controls,
     renderer,
     container,
@@ -57,6 +56,8 @@ export default class SceneInit {
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
+    this.scene.background = new THREE.Color(0x000000);
+
     // this.stats = Stats();
     // document.body.appendChild(this.stats.dom);
 
@@ -65,11 +66,11 @@ export default class SceneInit {
     ambientLight.castShadow = false;
     this.scene.add(ambientLight);
 
-    // spot light which is illuminating the chart directly
-    let spotLight = new THREE.SpotLight(0xffffff, 0.55);
-    spotLight.castShadow = true;
-    spotLight.position.set(0, 80, 10);
-    this.scene.add(spotLight);
+    // // spot light which is illuminating the chart directly
+    // let spotLight = new THREE.SpotLight(0xffffff, 0.55);
+    // spotLight.castShadow = true;
+    // spotLight.position.set(0, 80, 10);
+    // this.scene.add(spotLight);
 
     // if window resizes
     window.addEventListener("resize", () => this.onWindowResize(), false);
@@ -86,6 +87,7 @@ export default class SceneInit {
 
   render() {
     this.uniforms.u_time.value += this.clock.getDelta();
+
     this.renderer.render(this.scene, this.camera);
   }
 

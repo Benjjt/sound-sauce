@@ -1,4 +1,4 @@
-const vertexShader = (option, floatValue) => {
+const vertexShader = () => {
   return `
       varying float x;
       varying float y;
@@ -22,7 +22,7 @@ const vertexShader = (option, floatValue) => {
         float y_multiplier = (32.0 - y) / 8.0;
 
       
-        z = ${option}(u_data_arr[int(floor_x)] / ${floatValue} + u_data_arr[int(floor_y)] /${floatValue} ) * u_amplitude; //musicaly reactive standard wave
+        z = sin(u_data_arr[int(floor_x)] / 50.00 + u_data_arr[int(floor_y)] /50.0) * u_amplitude; //musicaly reactive standard wave
      
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position.x, position.y, z, 1.0);
@@ -37,20 +37,15 @@ const fragmentShader = () => {
     varying float z;
     varying vec3 vUv;
 
-    uniform float u_time;
+    
+    uniform float u_color_r;
     
 
     void main() {
       
 
-      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-      if (vUv.x < 0.0) {
-        gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
-      } else {
-        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-      }
-      gl_FragColor = vec4(abs(sin(u_time * .001)), 0.0, 0.0, 1.0);
-      gl_FragColor = vec4((32.0 - abs(x)) / 32.0, (32.0 - abs(y)) / 32.0, (abs(x + y) / 2.0) / 32.0, 1.0);
+      
+      gl_FragColor = vec4((u_color_r - abs(x)) / 32.0, (32.0 - abs(y)) / 32.0, (abs(x + y) / 2.0) / 32.0, 1.0);
     }
   `;
 };
