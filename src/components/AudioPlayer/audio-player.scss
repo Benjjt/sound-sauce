@@ -9,4 +9,10 @@
     &__options {
         @include mixin.audio-card-nav;
     }
+
+    &__icon:hover {
+        color: var(--primary);
+        cursor: pointer;
+        transform: scale(1.1)
+    }
 }

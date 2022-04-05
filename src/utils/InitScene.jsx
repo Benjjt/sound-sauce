@@ -30,7 +30,7 @@ export default class SceneInit {
       1,
       1000
     );
-    this.camera.position.z = 196;
+    this.camera.position.z = 400;
 
     this.clock = new THREE.Clock();
     this.scene = new THREE.Scene();
@@ -66,11 +66,11 @@ export default class SceneInit {
     ambientLight.castShadow = false;
     this.scene.add(ambientLight);
 
-    // // spot light which is illuminating the chart directly
-    // let spotLight = new THREE.SpotLight(0xffffff, 0.55);
-    // spotLight.castShadow = true;
-    // spotLight.position.set(0, 80, 10);
-    // this.scene.add(spotLight);
+    // spot light which is illuminating the chart directly
+    let spotLight = new THREE.SpotLight(0xffffff, 0.55);
+    spotLight.castShadow = true;
+    spotLight.position.set(0, 80, 10);
+    this.scene.add(spotLight);
 
     // if window resizes
     window.addEventListener("resize", () => this.onWindowResize(), false);

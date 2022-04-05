@@ -13,13 +13,14 @@
     &__controls {
         display: flex;
         flex-direction: column;
+        max-width: 400px;
         gap: 1rem;
         
     }
 
     &__logo-card {
         @include mixin.audio-card;
-        background-color: var(--dark);
+        background-color: #000000;
     }
 
     &__logo {

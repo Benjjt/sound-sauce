@@ -13,7 +13,7 @@ export const AudioMicrophone = (props) => {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then(function (stream) {
-        /* use the stream */
+        console.log(stream);
       })
       .catch(function (err) {
         /* handle the error */
