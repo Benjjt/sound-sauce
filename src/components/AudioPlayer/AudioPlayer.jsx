@@ -3,6 +3,7 @@ import "../AudioPlayer/audio-player.scss";
 import { BsUpload } from "react-icons/bs";
 import { BsFillMicFill } from "react-icons/bs";
 import testMusic from "../../assets/Music/test-audio2.mp3";
+import RickRoll from "../../assets/Music/RickRoll.mp3";
 
 const AudioPlayer = ({ togglePlay, setComponentState }) => {
   return (

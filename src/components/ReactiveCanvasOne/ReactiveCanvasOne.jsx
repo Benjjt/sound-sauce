@@ -82,7 +82,6 @@ export default function ReactiveCanvasOne() {
     uniforms.u_data_arr.value = dataArray;
 
     //* note: call render function on every animation frame
-    // console.log(dataArray); //!COME BACK TO THIS!
     requestAnimationFrame(() => {
       render(uniforms);
     });
@@ -97,7 +96,7 @@ export default function ReactiveCanvasOne() {
     const uniforms = {
       u_amplitude: {
         type: "f",
-        value: 10.0,
+        value: 20.0,
       },
       u_data_arr: {
         type: "float[64]",
